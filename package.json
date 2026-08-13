@@ -1,0 +1,20 @@
+{
+  "name": "unclekk-audit-then-optimize",
+  "version": "1.0.3",
+  "description": "UncleKK 的独立审计→优化→独立复审闭环工作流。防止自评分虚高，抓住优化器漏改的残留缺陷。Unclekk's independent-audit → optimize → independent re-audit loop: prevents self-score inflation and catches residual bugs.",
+  "author": "Hermes Agent",
+  "license": "MIT",
+  "keywords": [
+    "audit",
+    "optimization",
+    "independent-audit",
+    "self-score-inflation",
+    "unclekk"
+  ],
+  "category": "skill审计",
+  "related_skills": [
+    "skill-audit",
+    "unclekk-darwin-evolver",
+    "software-development/skill-audit"
+  ]
+}
