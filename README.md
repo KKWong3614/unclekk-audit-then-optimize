@@ -24,18 +24,31 @@ Or download the zip from the Release and extract it into your skills directory.
 
 ```
 unclekk-audit-then-optimize/
-├── SKILL.md      # 技能主文件（含 frontmatter）
-├── README.md     # 本文件
-├── LICENSE       # MIT 许可证
-├── references/   # 参考文档（如有）
-├── scripts/      # 可执行脚本（如有）
-└── templates/    # 模板（如有）
+├── SKILL.md          # 技能主文件（含 frontmatter）
+├── README.md         # 本文件
+├── LICENSE           # MIT 许可证
+├── CHANGELOG.md      # 版本变更记录
+├── package.json      # 技能元数据
+├── _meta.json        # 发布元数据
+├── scripts/          # 硬代码保障脚本（audit_guard.py）
+├── references/       # 参考文档
+└── examples/         # 调用示例
+```
+
+## 硬代码保障 (Hard-code Enforcement)
+
+`scripts/audit_guard.py`（零依赖，标准库）把预检闸、版本/链接/计数一致性等规则变成可机械判定的退出码。发布前必跑：
+
+```bash
+python scripts/audit_guard.py selfcheck --target "$SKILL_DIR"
+python scripts/audit_guard.py selftest --target "$SKILL_DIR"
+python scripts/audit_guard.py preflight --target "$SKILL_DIR"
 ```
 
 ## 版本 Version
 
-当前版本：`1.0.3`
-Current version: `1.0.3`
+当前版本：`1.2.3`
+Current version: `1.2.3`
 
 ## 许可证 License
 
