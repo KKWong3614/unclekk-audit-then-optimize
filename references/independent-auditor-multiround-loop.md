@@ -24,20 +24,22 @@
 
 **换言之**：本模式解决的是"优化触顶"问题（达尔文 hill-climbing），三步法解决的是"自评分虚高"问题。两者目标不同，不可混淆。
 
-## delegate_task 参数模板
+## Agent 参数模板（审计长派发）
 
 ```python
-delegate_task(
-    role="leaf",
-    context="""
+# 本环境用 Agent 工具（subagent_type="general-purpose"）；delegate_task 仅当宿主支持时作别名
+Agent(
+    description="独立审计长（达尔文+SkillEvolution 优化）",
+    subagent_type="general-purpose",
+    prompt="""
     目标 skill 路径：C:/Users/user/AppData/Local/hermes/skills/<skill-name>/
     包含文件：SKILL.md, scripts/harness.py, scripts/test_harness.py, ...
     Darwin 9 维 rubric 定义（每个维度 1-10 分，含权重公式）
     SkillEvolution 三阶段闭环（Phase 1-4）
     9 条审计规则
     触顶条件说明（上轮 Δ 值）
+    目标：作为独立第三方审计长，用达尔文 + SkillEvolution 优化该 skill，直到触顶
     """,
-    goal="作为独立第三方审计长，用达尔文 + SkillEvolution 优化该 skill，直到触顶",
 )
 ```
 
@@ -67,13 +69,13 @@ delegate_task(
 
 ```
 主 Agent
-  → delegate_task(role=leaf, 审计长第 1 轮)
+  → Agent(审计长第 1 轮)
     → 审计长：Phase 1-4 完整执行（策略变体生成 → 比较选择 → 独立审计 → 应用补丁）
     → 返回：基线+优化后分数、策略对比、审计通过率、results.tsv 条目
   → 主 Agent：独立验证审计长声称的 bug 修复和测试通过
   → 判断是否触顶（连续 2 轮真实有效 Δ < 2？）
   → 如未触顶：
-    → delegate_task(role=leaf, 审计长第 2 轮)
+    → Agent(审计长第 2 轮)
     → ...（重复直到触顶）
 ```
 
@@ -91,7 +93,7 @@ delegate_task(
 
 ## 经验教训
 
-- **不要伪造"并行 subagent"**：如果 delegate_task 不在工具集中，改成由审计长独立生成并逐项执行，诚实标注
+- **不要伪造"并行 subagent"**：如果 Agent 不在工具集中，改成由审计长独立生成并逐项执行，诚实标注
 - **分数不能直接加减**：不同审计长的归一方式不同（主 Agent 用 74-92 区间，审计长用 40-50 区间），横向比较无意义
 - **真实收益比分数重要**：3 轮独立审计发现了 2 个真 bug（沙箱逃逸 + 死引用），比任何分数提升都更有价值
 - **审计长不会改 SOUL.md 和其他 skill 的文件**：这是铁律，但主 Agent 要确认
