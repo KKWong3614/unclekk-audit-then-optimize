@@ -21,7 +21,7 @@ Skill 质量审计的首要信号应该是**缺陷是否存在**（grep 可判�
 
 ### P1 缺陷（误导用户/断裂流程）
 - [ ] 文档声称有 X 个工具，实际代码只有 Y 个（phantom tools）
-- [ ] 版本号三处（SKILL.md frontmatter / footer / CHANGELOG）不一致
+- [ ] 版本号五处（SKILL.md frontmatter / package.json / _meta.json / README / CHANGELOG 标题）不一致
 - [ ] 路径检测函数未做运行时验证——只读代码，未实际调用
 - [ ] bash 脚本修改后未跑 `bash -n`
 - [ ] import 清理时未检查函数签名的 type hints（List / Dict / Optional 等）
