@@ -1,4 +1,4 @@
-# unclekk-harness 第 4 轮独立审计案例（v1.0.5，2026-07-30）
+# unclekk-harness 第 4 轮独立审计案例（v1.0.5，2026-07-30；注：与 v1.0.4-remediation 的 2026-07-27 轮次共用「第 4 轮」标签，二者为不同版本的审计）
 
 ## 背景
 
@@ -8,7 +8,7 @@
 ## 流程
 
 1. 主 Hermes 加载 skill（SKILL.md / harness.py / test_harness.py / audit-layers.md）
-2. 启动独立 leaf 审计 agent（delegate_task，role=leaf，toolsets=[file,terminal]），
+2. 启动独立 leaf 审计 agent（Agent，subagent_type="general-purpose"，toolsets=[file,terminal]），
    主 Hermes 不参与审计过程（零预读、零评分、零方向）
 3. 审计长 6 层方法论（L0-L5）→ NEEDS_REVISION
 4. 主 Hermes 抽验 P0-1 / P0-2 关键发现（实证）
