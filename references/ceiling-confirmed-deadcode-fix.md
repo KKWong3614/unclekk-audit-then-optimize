@@ -11,7 +11,7 @@
 - 某个 recovery/safety 机制的函数签名带 `recover=True` 等参数，但所有调用方都传 False
 - 测试结果说"覆盖到了"，但实际是通过 `_load(recover=True)` 等直接调用测试的，不是通过 CLI
 
-## unclekk-harness 案例（2026-07-27，第 4 轮独立审计）
+## unclekk-harness 案例（2026-07-27，第 4 轮独立审计 · v1.0.4-remediation 阶段）
 
 | 信号 | 事实 |
 |------|------|
